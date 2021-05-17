@@ -1,9 +1,9 @@
 sudo: required
 services: 
-  -docker
+  - docker
   
 before_install:
-  -docker build -t bipulh/react-test -f  ./client/Dockerfile.dev
+  - docker build -t bipulh/react-test -f  ./client/Dockerfile.dev
 
 script:
   - docker run bipulh/reach-test npm test -- --cover
