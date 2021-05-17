@@ -1,0 +1,22 @@
+sudo: required
+services: 
+  -docker
+  
+before_install:
+  -docker build -t bipulh/react-test -f  ./client/Dockerfile.dev
+
+script:
+  - docker run bipulh/reach-test npm test -- --cover
+
+after_success:
+  - docker build -t bipulh/fibonacci-client ./client
+  - docker build -t bipulh/fibonacci-server ./server
+  - docker build -t bipulh/fibonacci-nginx ./nginx
+  - docker build -t bipulh/fibonacci-worker ./worker
+  #Log in to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+  #Push images to docker
+  - docker push bipulh/fibonacci-client
+  - docker push bipulh/fibonacci-nginx
+  - docker push bipulh/fibonacci-server
+  - docker push bipulh/fibonacci-worker
