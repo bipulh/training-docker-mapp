@@ -1,0 +1,37 @@
+{
+        "AWSEBDockerrunVersion": 2,
+        "containerDefinitions": [ {
+            "name": "client",
+            "image": "bipulh/fibonacci-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "bipulh/fibonacci-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "bipulh/fibonacci-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "bipulh/fibonacci-nginx",
+            "hostname": "mginx",
+            "essential": true,
+            "portMapping": [
+                {
+                    "hostPort": 80,
+                    "ontainerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+
+    ]
+
+}
