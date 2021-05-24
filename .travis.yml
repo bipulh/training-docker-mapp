@@ -3,7 +3,7 @@ services:
   - docker
   
 before_install:
-  - docker build -t bipulh/react-test -f ./client/Dockerfile.dev .
+  - docker build -t bipulh/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true bipulh/react-test npm test
@@ -21,12 +21,12 @@ after_success:
   - docker push bipulh/fibonacci-server
   - docker push bipulh/fibonacci-worker
 deploy:
-  provider: 'elasticbeanstalk'
+  provider: elasticbeanstalk
   region: 'us-west-1'
   app: 'fibonacci-docker'
   env: 'Fibonaccidocker-env'
   bucket_name: 'elasticbeanstalk-us-west-1-612358015827'
-  bucket_path: 'fibonacci-docker'
+  bucket_path: 'docker-fibonacci'
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
