@@ -21,7 +21,7 @@ after_success:
   - docker push bipulh/fibonacci-server
   - docker push bipulh/fibonacci-worker
   deploy:
-    provider: elasticbeansta
+    provider: elasticbeanstalk
     gion: 'us-west-1'
     app: 'fibonacci-docker'
     env: 'Fibonaccidocker-env'
