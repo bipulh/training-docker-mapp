@@ -35,7 +35,6 @@ const redisClient = redis.createClient({
 const redisPublisher = redisClient.duplicate();
 
 // Express route handlers
-//Travis Issue
 
 app.get("/", (req, res) => {
   res.send("Hi");
